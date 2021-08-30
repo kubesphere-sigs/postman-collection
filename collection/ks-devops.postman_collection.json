@@ -1,0 +1,654 @@
+{
+	"info": {
+		"_postman_id": "fe0a5d67-8247-491b-b1e4-f4d60f8e3364",
+		"name": "ks-devops",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pipelines",
+			"item": [
+				{
+					"name": "list pipelines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/pipelines?creator=test",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"pipelines"
+							],
+							"query": [
+								{
+									"key": "creator",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get good pipeline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/pipelines/good",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"pipelines",
+								"good"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get always success pipeline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/pipelines/always-success-pipeline",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"pipelines",
+								"always-success-pipeline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create pipeline",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"devopsName\": \"{{devops}}\",\n    \"metadata\": {\n        \"name\": \"always-success-pipeline\",\n        \"namespace\": \"{{devops}}\",\n        \"annotations\": {\n            \"kubesphere.io/creator\": \"admin\"\n        }\n    },\n    \"spec\": {\n        \"pipeline\": {\n            \"discarder\": {\n                \"days_to_keep\": \"7\",\n                \"num_to_keep\": \"10\"\n            },\n            \"devopsName\": \"{{devops}}\",\n            \"cluster\": \"default\",\n            \"devops\": \"{{devops}}\",\n            \"enable_timer_trigger\": false,\n            \"enable_discarder\": true,\n            \"name\": \"always-success-pipeline\",\n            \"jenkinsfile\": \"pipeline {\\n    agent any \\n    stages {\\n        stage('Greet') { \\n            steps {\\n              sh 'echo \\\"Hello, Jenkins!\\\"'\\n            }\\n        }\\n    }\\n}\"\n        },\n        \"type\": \"pipeline\"\n    },\n    \"kind\": \"Pipeline\",\n    \"apiVersion\": \"devops.kubesphere.io/v1alpha3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/pipelines?creator=test",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"pipelines"
+							],
+							"query": [
+								{
+									"key": "creator",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pipeline",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"devopsName\": \"{{devops}}\",\n    \"metadata\": {\n        \"name\": \"always-success-pipeline\",\n        \"namespace\": \"{{devops}}\",\n        \"annotations\": {\n            \"kubesphere.io/creator\": \"admin\"\n        }\n    },\n    \"spec\": {\n        \"pipeline\": {\n            \"discarder\": {\n                \"days_to_keep\": \"8\",\n                \"num_to_keep\": \"10\"\n            },\n            \"devopsName\": \"{{devops}}\",\n            \"cluster\": \"default\",\n            \"devops\": \"{{devops}}\",\n            \"enable_timer_trigger\": false,\n            \"enable_discarder\": true,\n            \"name\": \"always-success-pipeline\",\n            \"jenkinsfile\": \"pipeline {\\n    agent any \\n    stages {\\n        stage('Greet') { \\n            steps {\\n              sh 'echo \\\"Hello, Jenkins!\\\"'\\n            }\\n        }\\n    }\\n}\"\n        },\n        \"type\": \"pipeline\"\n    },\n    \"kind\": \"Pipeline\",\n    \"apiVersion\": \"devops.kubesphere.io/v1alpha3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/pipelines/always-success-pipeline",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"pipelines",
+								"always-success-pipeline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pipeline",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/pipelines/always-success-pipeline",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"pipelines",
+								"always-success-pipeline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search pipelines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha2/search?start=1&limit=10&q=type%3Apipeline%3Borganization%3Ajenkins%3Bpipeline%3A{{devops}}/*%2F%2A%3BexcludedFromFlattening%3Ajenkins.branch.MultiBranchProject%2Chudson.matrix.MatrixProject&filter=no-folders&ascending=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha2",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "q",
+									"value": "type%3Apipeline%3Borganization%3Ajenkins%3Bpipeline%3A{{devops}}/*%2F%2A%3BexcludedFromFlattening%3Ajenkins.branch.MultiBranchProject%2Chudson.matrix.MatrixProject"
+								},
+								{
+									"key": "filter",
+									"value": "no-folders"
+								},
+								{
+									"key": "annotation",
+									"value": "kubesphere.io/creator=admin,pipeline.devops.kubesphere.io/syncstatus=successful",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "ays-success-pi",
+									"disabled": true
+								},
+								{
+									"key": "ascending",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credentials",
+			"item": [
+				{
+					"name": "create credential",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiVersion\": \"v1\",\n    \"kind\": \"Secret\",\n    \"metadata\": {\n        \"namespace\": \"{{devops}}\",\n        \"labels\": {\n            \"app\": \"test-cred-id\"\n        },\n        \"annotations\": {\n            \"kubesphere.io/creator\": \"admin\"\n        },\n        \"name\": \"test-cred-id\"\n    },\n    \"type\": \"credential.devops.kubesphere.io/basic-auth\",\n    \"data\": {\n        \"username\": \"dGVzdA==\",\n        \"password\": \"b3BlbnRlc3Q=\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/credentials",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"credentials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list credentials",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/credentials?limit=10&sortBy=createTime&name=",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"credentials"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "createTime"
+								},
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get credential",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/credentials/{{credential}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"credentials",
+								"{{credential}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update credential",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiVersion\": \"v1\",\n    \"kind\": \"Secret\",\n    \"metadata\": {\n        \"namespace\": \"{{devops}}\",\n        \"labels\": {\n            \"app\": \"test-cred-id\"\n        },\n        \"annotations\": {\n            \"kubesphere.io/creator\": \"admin\"\n        },\n        \"name\": \"test-cred-id\"\n    },\n    \"type\": \"credential.devops.kubesphere.io/basic-auth\",\n    \"data\": {\n        \"username\": \"dGVzdA==\",\n        \"password\": \"aGVsbG93b3JsZAo=\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/credentials/{{credential}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"credentials",
+								"{{credential}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete credential",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/devops/{{devops}}/credentials/{{credential}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"devops",
+								"{{devops}}",
+								"credentials",
+								"{{credential}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DevOps Projects",
+			"item": [
+				{
+					"name": "list devops projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/workspaces/devops-workspace/devops?limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"workspaces",
+								"devops-workspace",
+								"devops"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create devops project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"metadata\": {\n        \"generateName\": \"test-devops-project\",\n        \"labels\": {\n            \"kubesphere.io/workspace\": \"devops-workspace\"\n        },\n        \"annotations\": {\n            \"kubesphere.io/creator\": \"admin\"\n        }\n    },\n    \"kind\": \"DevOpsProject\",\n    \"apiVersion\": \"devops.kubesphere.io/v1alpha3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/workspaces/devops-workspace/devops",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"workspaces",
+								"devops-workspace",
+								"devops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "udate devops project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"metadata\": {\n        \"name\": \"{{devops}}\",\n        \"resourceVersion\": \"131301\",\n        \"labels\": {\n            \"kubesphere.io/workspace\": \"devops-workspace\"\n        },\n        \"annotations\": {\n            \"devopsproject.devops.kubesphere.io/syncstatus\": \"pending\",\n            \"devopsproject.devops.kubesphere.io/synctime\": \"2021-07-13 14:04:31.582181972 +0800 CST m=+8380.357371042\",\n            \"kubesphere.io/creator\": \"admin\"\n        }\n    },\n    \"spec\": {},\n    \"status\": {}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/workspaces/devops-workspace/devops/{{devops}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"workspaces",
+								"devops-workspace",
+								"devops",
+								"{{devops}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get devops project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/workspaces/devops-workspace/devops/{{devops}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"workspaces",
+								"devops-workspace",
+								"devops",
+								"{{devops}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha3/workspaces/devops-workspace/devops/{{devops}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kapis",
+								"devops.kubesphere.io",
+								"v1alpha3",
+								"workspaces",
+								"devops-workspace",
+								"devops",
+								"{{devops}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "v1alpha2",
+			"item": [
+				{
+					"name": "informers_test",
+					"item": [
+						{
+							"name": "credentials_usage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha2/devops/{{devops}}/credentials/{{credential}}/usage",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"kapis",
+										"devops.kubesphere.io",
+										"v1alpha2",
+										"devops",
+										"{{devops}}",
+										"credentials",
+										"{{credential}}",
+										"usage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pipeline",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha2/devops/{{devops}}/pipelines/{{pipeline}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"kapis",
+										"devops.kubesphere.io",
+										"v1alpha2",
+										"devops",
+										"{{devops}}",
+										"pipelines",
+										"{{pipeline}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "s2i",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "s2ibinary",
+											"type": "file",
+											"src": "/home/pro/Desktop/hello-world-http"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/kapis/devops.kubesphere.io/v1alpha2/namespaces/{{namespace}}/s2ibinaries/{{s2ibinary}}/file",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"kapis",
+										"devops.kubesphere.io",
+										"v1alpha2",
+										"namespaces",
+										"{{namespace}}",
+										"s2ibinaries",
+										"{{s2ibinary}}",
+										"file"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
